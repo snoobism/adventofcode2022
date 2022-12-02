@@ -5,13 +5,6 @@ module Lib
     Sign
     ) where
 
-import Data.Char (chr, ord)
-
-instance Num Char where
-    c1 + c2 = chr (ord c1 + ord c2)
-    c1 - c2 = chr (ord c1 - ord c2)
-    fromInteger = chr . fromInteger
-
 data Sign = Rock | Paper | Scissor deriving (Enum, Eq, Show)
 
 tuplify2 :: [a] -> (a,a)
@@ -41,4 +34,4 @@ findScore s = do
         GT -> 0 + fromEnum s2 + 1
         EQ -> 3 + fromEnum s2 + 1
         LT -> 6 + fromEnum s2 + 1
-                                  
+                                
