@@ -15,4 +15,4 @@ main = do
     let groups = chunksOf 3 rucksacks
     let badges = [intersect (intersect a b) c !! 0 | [a, b, c] <- groups]
     let badgePriorities = calculatePriorities badges
-    print (sum badgePriorities)
+    print (sum badgePriorities) -- Second part
