@@ -1,7 +1,6 @@
 module Lib where
 
 import Data.List (break)
-import Debug.Trace (trace)
 
 type Name = String
 type Size = Int
@@ -9,8 +8,6 @@ data FSItem = File Name Size | Folder Name [FSItem] deriving (Show)
 data FSCrumb = FSCrumb Name [FSItem] [FSItem] deriving (Show)
 type FSZipper = (FSItem, [FSCrumb])
 
-getName :: FSItem -> Name
-getName (Folder name _) = name
 parseInput :: FSZipper -> [String] ->  FSZipper
 parseInput zipper ["$", "cd", "/"]  = fsGoToRoot zipper
 parseInput zipper ["$", "cd", ".."]  = fsUp zipper
