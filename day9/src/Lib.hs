@@ -18,17 +18,17 @@ headDirections (m:ms) pos trail = do
     let moveTrail@(x:xs) = move m pos trail
     headDirections ms x (move m pos trail)
 
-tailDirections :: [(Int, Int)] -> (Int, Int) -> (Int, Int) -> [(Int, Int)] -> [(Int, Int)]
-tailDirections [] old pos trail = (pos:trail) 
-tailDirections ((hx, hy):ms) (oldHx, oldHy) pos@(tx, ty) trail = do
+tailDirections :: [(Int, Int)] -> (Int, Int) -> [(Int, Int)] -> [(Int, Int)]
+tailDirections [] pos trail = (pos:trail) 
+tailDirections ((hx, hy):ms)  pos@(tx, ty) trail = do
     let (nextX, nextY) = case ((abs(hx-tx) <= 1), (abs(hy-ty) <= 1)) of
             (True, True) -> (tx, ty)
             (False, True) -> ((hx+tx) `div` 2, hy)
             (True, False) -> (hx, (hy+ty) `div` 2)
             (False, False) -> ((hx+tx) `div` 2, (hy+ty) `div` 2)
-    tailDirections ms (hx, hy) (nextX, nextY) (pos:trail)
+    tailDirections ms (nextX, nextY) (pos:trail)
 
 applyN :: [(Int, Int)] -> Int -> [(Int, Int)]
 applyN headTrail 0 = headTrail
-applyN headTrail n = applyN (reverse $ tailDirections headTrail (0, 0) (0, 0) []) (n-1)
+applyN headTrail n = applyN (reverse $ tailDirections headTrail (0, 0) []) (n-1)
     
